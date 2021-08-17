@@ -15,7 +15,7 @@ var tempLng = "0";
 var aliveCheckedText = "";
 var aliveUncheckedText = "";
 
-var findAddress, btnFindGrave, btnCreateReset, btnOpenCreateNew, btnCreateDo, btnCreateClose, nograve, chkAlive, inDod, lblDod, inHeritage, heritageStoneText, stoneTextContainer, inHeritageMessage, btnOpenHeritage, menuHeritage, inHeritageClaimDob, btnHeritageClaim, btnHeritageClose, btnOwnGrave, relationshipSettings, btnSettingsRelationshipClose, btnGraveEdit, inHeritageLat, inHeritageLng, gravePositioning, inputCreateGraveLat, inputCreateGraveLng, mapCreateContainer, graveMapContainer, gravePortraitContainer, graveNameContainer, graveDateContainer, graveTextContainer, graveGiftsContainer, relationshipContainer, deadsmessage, inStoneText;
+var containerDeadsMessage, findAddress, btnFindGrave, btnCreateReset, btnOpenCreateNew, btnCreateDo, btnCreateClose, nograve, chkAlive, inDod, lblDod, inHeritage, heritageStoneText, stoneTextContainer, inHeritageMessage, btnOpenHeritage, menuHeritage, inHeritageClaimDob, btnHeritageClaim, btnHeritageClose, btnOwnGrave, relationshipSettings, btnSettingsRelationshipClose, btnGraveEdit, inHeritageLat, inHeritageLng, gravePositioning, inputCreateGraveLat, inputCreateGraveLng, mapCreateContainer, graveMapContainer, gravePortraitContainer, graveNameContainer, graveDateContainer, graveTextContainer, graveGiftsContainer, relationshipContainer, deadsmessage, inStoneText;
 
 async function startGraveyard() {
     $(document).tooltip();
@@ -62,6 +62,7 @@ async function startGraveyard() {
     relationshipContainer = $("#container-grave-relationship");
     deadsmessage = $("#deads-message");
     inStoneText = $("#create-grave-text");
+    containerDeadsMessage = $("#deads-message-container");
 
     btnOwnGrave.on("click", function() {
         initGrave(selectedAccount);
@@ -156,6 +157,9 @@ async function createNewGrave() {
 
     if (heritage == "") heritage = "0x1E1a62760756bAD57a5b25b889A65DDa7EBDe630";
 
+    var alive = dod == aliveDod;
+    if (alive) text = CryptoJS.AES.encrypt(text, heritage).toString();
+
     var c1 = name.length > 0;
     var c2 = (dob.length > 0) && ($("#create-grave-dob").val().split("/").length === 3);
     var c3 = dod.length > 0 && ($("#create-grave-dod").val().split("/").length === 3);
@@ -238,8 +242,10 @@ async function initGrave(fromAccount) {
 
         checked = inDod.val() == aliveDod;
         chkAlive.prop('checked', checked);
-        if (checked) aliveCheckedText = text;
-        else aliveUncheckedText = text;
+        if (text != "") {
+            if (checked) aliveCheckedText = CryptoJS.AES.decrypt(text, inHeritage.val()).toString(CryptoJS.enc.Utf8);
+            else aliveUncheckedText = text;
+        }
         checkAlive(checked);
 
         // Mother & Father
@@ -262,7 +268,7 @@ async function initGrave(fromAccount) {
         containerRelationship.html("<br>" + textRelationship);
 
         // Grave text
-        graveTextContainer.html(text);
+        if (dod != aliveDod) graveTextContainer.html(text);
         if (lat == "" || lng == "" || lat == "0" && lng == "0") {
             graveMapContainer.hide();
         } else {
@@ -461,12 +467,18 @@ async function setRelationship(addressMother, addressFather) {
 }
 
 async function initHeritageClaiming(fromAccount) {
+    containerDeadsMessage.show();
+
     selectedGrave = fromAccount;
     heritageGrave = await callGrave(fromAccount);
     var position = heritageGrave.getPosition();
     inHeritageLat.val(heritageGrave.getLatitude(position));
     inHeritageLng.val(heritageGrave.getLongitude(position));
-    deadsmessage.text(heritageGrave.getText());
+
+    var encryptedAES = heritageGrave.getText();
+    var text = CryptoJS.AES.decrypt(encryptedAES, heritageGrave.getHeritage()).toString(CryptoJS.enc.Utf8);
+    if (text != "") deadsmessage.text(text);
+    else containerDeadsMessage.hide();
 
     btnOpenHeritage.show();
     inHeritageClaimDob.datepicker();
