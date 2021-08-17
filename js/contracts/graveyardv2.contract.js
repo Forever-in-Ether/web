@@ -3,37 +3,54 @@ global.contracts = global.contracts || {};
 
 var contract = contract || {};
 contract.GraveyardV2 = {
-    abi: [
+    abi: [{
+            "constant": false,
+            "inputs": [{
+                    "name": "x",
+                    "type": "address"
+                },
+                {
+                    "name": "_date",
+                    "type": "string"
+                },
+                {
+                    "name": "_text",
+                    "type": "string"
+                },
+                {
+                    "name": "_position",
+                    "type": "string"
+                }
+            ],
+            "name": "claimHeritage",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
         {
             "constant": true,
-            "inputs": [
-                {
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
+            "inputs": [{
+                "name": "",
+                "type": "uint256"
+            }],
             "name": "grave_address",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address"
-                }
-            ],
+            "outputs": [{
+                "name": "",
+                "type": "address"
+            }],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
         },
         {
             "constant": true,
-            "inputs": [
-                {
-                    "name": "_address",
-                    "type": "address"
-                }
-            ],
+            "inputs": [{
+                "name": "_address",
+                "type": "address"
+            }],
             "name": "getGrave",
-            "outputs": [
-                {
+            "outputs": [{
                     "name": "",
                     "type": "string"
                 },
@@ -68,8 +85,7 @@ contract.GraveyardV2 = {
         },
         {
             "constant": false,
-            "inputs": [
-                {
+            "inputs": [{
                     "name": "_image",
                     "type": "string"
                 },
@@ -108,67 +124,37 @@ contract.GraveyardV2 = {
             "constant": true,
             "inputs": [],
             "name": "getGraveyardV1",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address"
-                }
-            ],
+            "outputs": [{
+                "name": "",
+                "type": "address"
+            }],
             "payable": false,
             "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "x",
-                    "type": "address"
-                },
-                {
-                    "name": "_date",
-                    "type": "string"
-                },
-                {
-                    "name": "_position",
-                    "type": "string"
-                }
-            ],
-            "name": "claimHeritage",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
             "constant": true,
             "inputs": [],
             "name": "showBalance",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
+            "outputs": [{
+                "name": "",
+                "type": "uint256"
+            }],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
         },
         {
             "constant": true,
-            "inputs": [
-                {
-                    "name": "x",
-                    "type": "address"
-                }
-            ],
+            "inputs": [{
+                "name": "x",
+                "type": "address"
+            }],
             "name": "getHeritage",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address"
-                }
-            ],
+            "outputs": [{
+                "name": "",
+                "type": "address"
+            }],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -177,12 +163,10 @@ contract.GraveyardV2 = {
             "constant": true,
             "inputs": [],
             "name": "getGraveAmount",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
+            "outputs": [{
+                "name": "",
+                "type": "uint256"
+            }],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -191,12 +175,10 @@ contract.GraveyardV2 = {
             "constant": true,
             "inputs": [],
             "name": "getGraves",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address[]"
-                }
-            ],
+            "outputs": [{
+                "name": "",
+                "type": "address[]"
+            }],
             "payable": false,
             "stateMutability": "view",
             "type": "function"
@@ -209,18 +191,16 @@ contract.GraveyardV2 = {
         },
         {
             "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "name": "grave_address",
-                    "type": "address"
-                }
-            ],
+            "inputs": [{
+                "indexed": false,
+                "name": "grave_address",
+                "type": "address"
+            }],
             "name": "newGraveEvent",
             "type": "event"
         }
     ],
 
-    address_test: "0xb95cb2110A7A9108094Ef1FA40c5d04F756cF5fD", // Test
+    address_test: "0x0DcBa48F99EfBcCb9AB02d3A2Dde2283a5f4231C", // Test
     address: "" // Productive
 };

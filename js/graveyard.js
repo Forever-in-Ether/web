@@ -12,7 +12,7 @@ var tempDod = "00/00/0000";
 var tempLat = "0";
 var tempLng = "0";
 
-var findAddress, btnFindGrave, btnCreateReset, btnOpenCreateNew, btnCreateDo, btnCreateClose, nograve, chkAlive, inDod, lblDod, inHeritage, btnOpenHeritage, menuHeritage, inHeritageClaimDob, btnHeritageClaim, btnHeritageClose, btnOwnGrave, relationshipSettings, btnSettingsRelationshipClose, btnGraveEdit, inHeritageLat, inHeritageLng, gravePositioning, inputCreateGraveLat, inputCreateGraveLng, mapCreateContainer, graveMapContainer, gravePortraitContainer, graveNameContainer, graveDateContainer, graveTextContainer, graveGiftsContainer;
+var findAddress, btnFindGrave, btnCreateReset, btnOpenCreateNew, btnCreateDo, btnCreateClose, nograve, chkAlive, inDod, lblDod, inHeritage, heritageStoneText, stoneTextContainer, inHeritageMessage, btnOpenHeritage, menuHeritage, inHeritageClaimDob, btnHeritageClaim, btnHeritageClose, btnOwnGrave, relationshipSettings, btnSettingsRelationshipClose, btnGraveEdit, inHeritageLat, inHeritageLng, gravePositioning, inputCreateGraveLat, inputCreateGraveLng, mapCreateContainer, graveMapContainer, gravePortraitContainer, graveNameContainer, graveDateContainer, graveTextContainer, graveGiftsContainer, relationshipContainer;
 
 async function startGraveyard() {
     $(document).tooltip();
@@ -32,8 +32,10 @@ async function startGraveyard() {
     inDod = $("#create-grave-dod");
     lblDod = $("#lbl-create-grave-dod");
     inHeritage = $("#create-grave-heritage");
+    inHeritageMessage = $("#create-grave-heritage-message-container");
     btnOpenHeritage = $("#container-grave-claim-heritage");
     menuHeritage = $("#menu-heritage");
+    heritageStoneText = $("#input-claim-heritag-grave-text");
     inHeritageClaimDob = $("#input-claim-heritage-dob");
     btnHeritageClaim = $("#btn-claim-heritage-claim");
     btnHeritageClose = $("#btn-claim-heritage-close");
@@ -53,6 +55,8 @@ async function startGraveyard() {
     graveDateContainer = $("#container-grave-date");
     graveTextContainer = $("#container-grave-text");
     graveGiftsContainer = $("#container-gifts");
+    stoneTextContainer = $("#create-grave-text-container");
+    relationshipContainer = $("#container-grave-relationship");
 
     btnOwnGrave.on("click", function() {
         initGrave(selectedAccount);
@@ -464,6 +468,7 @@ async function initHeritageClaiming(fromAccount) {
         btnOpenHeritage.hide();
         graveMapContainer.show();
 
+        relationshipContainer.hide();
         graveInfo.hide();
         graveGiftsContainer.hide();
     });
@@ -473,6 +478,7 @@ async function initHeritageClaiming(fromAccount) {
         btnOpenHeritage.show();
         graveMapContainer.hide();
 
+        relationshipContainer.show();
         graveInfo.show();
         graveGiftsContainer.show();
     });
@@ -489,7 +495,8 @@ async function initHeritageClaiming(fromAccount) {
 async function claimHeritage(grave) {
     btnHeritageClose.click();
     var position = inHeritageLat.val() + "," + inHeritageLng.val();
-    await graveyardV2.methods.claimHeritage(grave, inHeritageClaimDob.val(), position).send({ from: selectedAccount });
+    var stoneText = heritageStoneText.val();
+    await graveyardV2.methods.claimHeritage(grave, inHeritageClaimDob.val(), stoneText, position).send({ from: selectedAccount });
     initGrave(selectedGrave);
 }
 
@@ -636,6 +643,8 @@ function checkAlive(checked) {
         lblDod.hide();
         gravePositioning.hide();
         graveGiftsContainer.hide();
+        inHeritageMessage.show();
+        stoneTextContainer.hide();
 
         tempDod = inDod.val();
         inDod.val(aliveDod);
@@ -654,5 +663,7 @@ function checkAlive(checked) {
         lblDod.show();
         gravePositioning.show();
         graveGiftsContainer.show()
+        inHeritageMessage.hide();
+        stoneTextContainer.show();
     }
 }
