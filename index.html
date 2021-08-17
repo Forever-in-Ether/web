@@ -78,11 +78,6 @@
                     </div>
                 </p>
 
-                <p id="create-grave-text-container">
-                    Stone Text<br>
-                    <textarea id="create-grave-text" name="create-grave-text" placeholder=""></textarea>
-                </p>
-
                 <p>
                     <div>
                         <input id="create-grave-dob" name="create-grave-dob" placeholder=""></input>
@@ -98,9 +93,10 @@
                         <label for="create-grave-heritage">Heritage Address</label>
                     </div>
                 </p>
-                <p id="create-grave-heritage-message-container">
-                    Message to heritage after your death<br>
-                    <textarea id="create-grave-heritage-message" name="create-grave-heritage-message"></textarea rows="5" cols="10">
+                <p>
+                    <div id="create-grave-heritage-message-container">Message to heritage after your death</div>
+                    <div id="create-grave-text-container">Stone Text</div>
+                    <textarea id="create-grave-text" name="create-grave-text"></textarea rows="5" cols="10">
                 </p>
             </div>
             <div style="display: inline-block; vertical-align: top; width: auto; margin-left: 4px; margin-right: 4px;">
@@ -147,6 +143,7 @@
                 </div>
                 <div id="menu-heritage" hidden>
                     <h2>Claim Heritage</h2>
+                    <p><b>Message from the deceased:</b><br><span id="deads-message"></span></p>
                     Date of Death<br>
                     <input id="input-claim-heritage-dob" name="input-claim-heritage-dob" placeholder="mm/dd/yyyy"></input><br>
                     <p>

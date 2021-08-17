@@ -12,7 +12,10 @@ var tempDod = "00/00/0000";
 var tempLat = "0";
 var tempLng = "0";
 
-var findAddress, btnFindGrave, btnCreateReset, btnOpenCreateNew, btnCreateDo, btnCreateClose, nograve, chkAlive, inDod, lblDod, inHeritage, heritageStoneText, stoneTextContainer, inHeritageMessage, btnOpenHeritage, menuHeritage, inHeritageClaimDob, btnHeritageClaim, btnHeritageClose, btnOwnGrave, relationshipSettings, btnSettingsRelationshipClose, btnGraveEdit, inHeritageLat, inHeritageLng, gravePositioning, inputCreateGraveLat, inputCreateGraveLng, mapCreateContainer, graveMapContainer, gravePortraitContainer, graveNameContainer, graveDateContainer, graveTextContainer, graveGiftsContainer, relationshipContainer;
+var aliveCheckedText = "";
+var aliveUncheckedText = "";
+
+var findAddress, btnFindGrave, btnCreateReset, btnOpenCreateNew, btnCreateDo, btnCreateClose, nograve, chkAlive, inDod, lblDod, inHeritage, heritageStoneText, stoneTextContainer, inHeritageMessage, btnOpenHeritage, menuHeritage, inHeritageClaimDob, btnHeritageClaim, btnHeritageClose, btnOwnGrave, relationshipSettings, btnSettingsRelationshipClose, btnGraveEdit, inHeritageLat, inHeritageLng, gravePositioning, inputCreateGraveLat, inputCreateGraveLng, mapCreateContainer, graveMapContainer, gravePortraitContainer, graveNameContainer, graveDateContainer, graveTextContainer, graveGiftsContainer, relationshipContainer, deadsmessage, inStoneText;
 
 async function startGraveyard() {
     $(document).tooltip();
@@ -57,6 +60,8 @@ async function startGraveyard() {
     graveGiftsContainer = $("#container-gifts");
     stoneTextContainer = $("#create-grave-text-container");
     relationshipContainer = $("#container-grave-relationship");
+    deadsmessage = $("#deads-message");
+    inStoneText = $("#create-grave-text");
 
     btnOwnGrave.on("click", function() {
         initGrave(selectedAccount);
@@ -144,7 +149,7 @@ async function createNewGrave() {
     var heritage = $("#create-grave-heritage").val();
     var dob = $("#create-grave-dob").val();
     var dod = $("#create-grave-dod").val();
-    var text = $("#create-grave-text").val();
+    var text = inStoneText.val();
     var lat = inputCreateGraveLat.val();
     var lng = inputCreateGraveLng.val();
     var position = lat + "," + lng;
@@ -214,7 +219,6 @@ async function initGrave(fromAccount) {
         inDod.val(dod);
         $("#output-upload-portrait").val(portrait);
         $("#output-upload-background").val(bg);
-        $("#create-grave-text").val(text);
         inputCreateGraveLat.val(lat);
         inputCreateGraveLng.val(lng);
 
@@ -234,6 +238,8 @@ async function initGrave(fromAccount) {
 
         checked = inDod.val() == aliveDod;
         chkAlive.prop('checked', checked);
+        if (checked) aliveCheckedText = text;
+        else aliveUncheckedText = text;
         checkAlive(checked);
 
         // Mother & Father
@@ -460,6 +466,7 @@ async function initHeritageClaiming(fromAccount) {
     var position = heritageGrave.getPosition();
     inHeritageLat.val(heritageGrave.getLatitude(position));
     inHeritageLng.val(heritageGrave.getLongitude(position));
+    deadsmessage.text(heritageGrave.getText());
 
     btnOpenHeritage.show();
     inHeritageClaimDob.datepicker();
@@ -467,6 +474,7 @@ async function initHeritageClaiming(fromAccount) {
         menuHeritage.show();
         btnOpenHeritage.hide();
         graveMapContainer.show();
+
 
         relationshipContainer.hide();
         graveInfo.hide();
@@ -607,7 +615,7 @@ menu.create = {
         $("#create-grave-name").val("");
         $("#create-grave-dob").val("");
         $("#create-grave-dod").val("");
-        $("#create-grave-text").val("");
+        inStoneText.val("");
         inputCreateGraveLat.val("");
         inputCreateGraveLng.val("");
 
@@ -652,6 +660,9 @@ function checkAlive(checked) {
         tempLng = inputCreateGraveLng.val();
         inputCreateGraveLat.val("0");
         inputCreateGraveLng.val("0");
+
+        aliveUncheckedText = inStoneText.val();
+        inStoneText.val(aliveCheckedText);
     } else {
         inputCreateGraveLat.val(tempLat);
         inputCreateGraveLng.val(tempLng);
@@ -665,5 +676,7 @@ function checkAlive(checked) {
         graveGiftsContainer.show()
         inHeritageMessage.hide();
         stoneTextContainer.show();
+        aliveCheckedText = inStoneText.val();
+        inStoneText.val(aliveUncheckedText);
     }
 }
