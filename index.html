@@ -41,86 +41,6 @@
             </div>
         </div>
 
-
-        <div id="grave-create" class="hidden">
-            <div style="display: inline-block; width: auto; margin-left: 4px; margin-right: 4px;">
-                <p>
-                    <div>
-                        <label for="label-upload-portrait" title='Click the file choosing button to select an image from your device and "Upload" afterwards.'>Portrait</label><br>
-                        <input id="output-upload-portrait" disabled></input>
-                        <input id="input-upload-portrait" name="input-upload-image" placeholder="Select image" type="file" accept="image/png, image/jpeg">
-                        <br>
-                        <button id="btn-upload-portrait">Upload</button>
-                        <img id="img-upload-loading-portrait" src="images/loading_32x32.gif" hidden/>
-                        <span id="upload-error-portrait" hidden>Something went wrong, sorry :(</span>
-                    </div>
-                </p>
-                <p>
-                    <div style="display: inline-block">
-                        <label for="label-upload-background" title='Click the file choosing button to select an image from your device and "Upload" afterwards.'>Card Background</label><br>
-                        <input id="output-upload-background" disabled></input>
-                        <input id="input-upload-background" name="input-upload-background" placeholder="Select image" type="file" accept="image/png, image/jpeg">
-                        <br>
-                        <button id="btn-upload-background">Upload</button>
-                        <img id="img-upload-loading-background" src="images/loading_32x32.gif" hidden/>
-                        <span id="upload-error-background" hidden>Something went wrong, sorry :(</span>
-                    </div>
-                </p>
-
-                <p>
-                    <div>
-                        <input id="create-grave-name"  name="create-grave-name" placeholder=""></input>
-                        <label for="create-grave-name" title="Name of the person who belongs to this memory.">Name*</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" class="chk-alive" id="create-grave-alive" name="alive">
-                        <label for="alive" title="Is the person alive still?">alive</label>
-                    </div>
-                </p>
-
-                <p>
-                    <div>
-                        <input id="create-grave-dob" name="create-grave-dob" placeholder=""></input>
-                        <label for="create-grave-dob" title="You can pick the date from the datepicker or enter by hand (mm/dd/yyyy).">Date of Birth*</label>
-                    </div>
-                    <div>
-                        <input id="create-grave-dod" name="create-grave-dod" placeholder=""></input>
-                        <label id="lbl-create-grave-dod" for="create-grave-dod" title="You can pick the date from the datepicker or enter by hand (mm/dd/yyyy).">Date of Death*</label>
-                    </div>
-
-                    <div>
-                        <input id="create-grave-heritage" name="create-grave-heritage" placeholder="0x..."></input>
-                        <label for="create-grave-heritage" title="Address of the one who can get access after death, change the last settings and receive income from candle and flowers of this grave.">Heritage Address</label>
-                    </div>
-                </p>
-                <p>
-                    <div id="create-grave-heritage-message-container" title="Leave a message for persons heritage after his/her death. (Public!)">Message to heritage after death.</div>
-                    <div id="create-grave-text-container" title="Text that goes under the portrait.">Stone Text</div>
-                    <textarea id="create-grave-text" name="create-grave-text"></textarea rows="5" cols="10">
-                </p>
-            </div>
-            <div style="display: inline-block; vertical-align: top; width: auto; margin-left: 4px; margin-right: 4px;">
-                <p>
-                    <div id="grave-positioning" style="display: inline-block; vertical-align: top; width: 100%">
-                        <div style="width: 100%">
-                            <label for="create-grave-pos-lat" title="Set position of the grave by clicking on the map.">Grave Position</label>
-                            <input id="create-grave-pos-lat" name="create-grave-pos-lat" placeholder="Latitude"></input>
-                            <input id="create-grave-pos-lng" name="create-grave-pos-lng" placeholder="Longitude"></input>
-
-                        </div>
-                        <div id="map-create"></div>
-                    </div>
-                </p>
-            </div>
-
-            <div style="vertical-align: bottom; margin-top: 8px; width: 100%; text-align: end;">
-                <button id="btnCreateDo">Create/Edit</button>
-                <button id="btnCreateReset">Reset</button>
-                <button id="btnCreateClose">Close</button>
-            </div>
-
-        </div>
-
         <div id="no-grave" class="center">
             <img src="images/tombstoneEmpty.png" /><br> There is no grave on your current address.<br><br>
             <button id="btn-grave-setup" class="createEdit-button" hidden>Setup a new grave on this address...</button>
@@ -133,6 +53,86 @@
                     <button id="container-grave-settings" hidden>Relationship</button>
                     <button id="container-grave-claim-heritage" hidden>Claim Heritage</button>
                 </div>
+
+                <div id="grave-create" class="left hidden">
+                    <div style="display: inline-block; width: auto; margin-left: 4px; margin-right: 4px;">
+                        <p>
+                            <div>
+                                <label for="label-upload-portrait" title='Click the file choosing button to select an image from your device and "Upload" afterwards.'>Portrait</label><br>
+                                <input id="output-upload-portrait" disabled></input>
+                                <input id="input-upload-portrait" name="input-upload-image" placeholder="Select image" type="file" accept="image/png, image/jpeg">
+                                <br>
+                                <button id="btn-upload-portrait">Upload</button>
+                                <img id="img-upload-loading-portrait" src="images/loading_32x32.gif" hidden/>
+                                <span id="upload-error-portrait" hidden>Something went wrong, sorry :(</span>
+                            </div>
+                        </p>
+                        <p>
+                            <div style="display: inline-block">
+                                <label for="label-upload-background" title='Click the file choosing button to select an image from your device and "Upload" afterwards.'>Card Background</label><br>
+                                <input id="output-upload-background" disabled></input>
+                                <input id="input-upload-background" name="input-upload-background" placeholder="Select image" type="file" accept="image/png, image/jpeg">
+                                <br>
+                                <button id="btn-upload-background">Upload</button>
+                                <img id="img-upload-loading-background" src="images/loading_32x32.gif" hidden/>
+                                <span id="upload-error-background" hidden>Something went wrong, sorry :(</span>
+                            </div>
+                        </p>
+        
+                        <p>
+                            <div>
+                                <input id="create-grave-name"  name="create-grave-name" placeholder=""></input>
+                                <label for="create-grave-name" title="Name of the person who belongs to this memory.">Name*</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" class="chk-alive" id="create-grave-alive" name="alive">
+                                <label for="alive" title="Is the person alive still?">alive</label>
+                            </div>
+                        </p>
+        
+                        <p>
+                            <div>
+                                <input id="create-grave-dob" name="create-grave-dob" placeholder=""></input>
+                                <label for="create-grave-dob" title="You can pick the date from the datepicker or enter by hand (mm/dd/yyyy).">Date of Birth*</label>
+                            </div>
+                            <div>
+                                <input id="create-grave-dod" name="create-grave-dod" placeholder=""></input>
+                                <label id="lbl-create-grave-dod" for="create-grave-dod" title="You can pick the date from the datepicker or enter by hand (mm/dd/yyyy).">Date of Death*</label>
+                            </div>
+        
+                            <div>
+                                <input id="create-grave-heritage" name="create-grave-heritage" placeholder="0x..."></input>
+                                <label for="create-grave-heritage" title="Address of the one who can get access after death, change the last settings and receive income from candle and flowers of this grave.">Heritage Address</label>
+                            </div>
+                        </p>
+                        <p>
+                            <div id="create-grave-heritage-message-container" title="Leave a message for persons heritage after his/her death. (Public!)">Message to heritage after death.</div>
+                            <div id="create-grave-text-container" title="Text that goes under the portrait.">Stone Text</div>
+                            <textarea id="create-grave-text" name="create-grave-text"></textarea rows="5" cols="10">
+                        </p>
+                    </div>
+                    <div style="display: inline-block; vertical-align: top; width: auto; margin-left: 4px; margin-right: 4px;">
+                        <p>
+                            <div id="grave-positioning" style="display: inline-block; vertical-align: top; width: 100%">
+                                <div style="width: 100%">
+                                    <label for="create-grave-pos-lat" title="Set position of the grave by clicking on the map.">Grave Position</label>
+                                    <input id="create-grave-pos-lat" name="create-grave-pos-lat" placeholder="Latitude"></input>
+                                    <input id="create-grave-pos-lng" name="create-grave-pos-lng" placeholder="Longitude"></input>
+        
+                                </div>
+                                <div id="map-create"></div>
+                            </div>
+                        </p>
+                    </div>
+        
+                    <div style="vertical-align: bottom; margin-top: 8px; width: 100%; text-align: end;">
+                        <button id="btnCreateDo">Create/Edit</button>
+                        <button id="btnCreateReset" hidden>Reset</button>
+                        <button id="btnCreateClose">Close</button>
+                    </div>
+        
+                </div>
+
                 <div id="menu-relationship" class="hidden">
                     <p>
                         <h2>Relationship Settings</h2>

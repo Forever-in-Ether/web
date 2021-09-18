@@ -191,6 +191,7 @@ async function createNewGrave() {
 }
 
 async function initGrave(fromAccount) {
+    graveInfo.show();
     btnOpenHeritage.hide();
 
     localStorage.setItem(STORAGE_GRAVE_ADDRESS, fromAccount);
@@ -293,12 +294,15 @@ async function initGrave(fromAccount) {
                 if (menu.create.view.hasClass("hidden")) {
                     menu.create.open();
                     btnGraveEdit.hide();
+                    graveInfo.hide();
+                    relationshipContainer.hide();
                 }
             });
         } else {
             btnGraveEdit.hide();
+            $("#container-grave-settings").hide();
+            $("#menu-relationship").hide();
         }
-
     } else {
         $("#no-grave").removeClass("hidden")
         $("#no-grave").removeClass("hidden");
@@ -427,7 +431,8 @@ async function initRelations(address) {
 
         relationshipSettings.on("click", function() {
             menu.relationship.open();
-            relationshipSettings.hide();
+            $("#menu-relationship").show();
+            relationshipContainer.hide();
 
             graveInfo.hide();
         });
@@ -438,6 +443,7 @@ async function initRelations(address) {
             menu.relationship.close();
             graveInfo.show();
             relationshipSettings.show();
+            relationshipContainer.show();
         });
 
         btnGraveSettingsClose = $("#btn-settings-close");
@@ -445,6 +451,7 @@ async function initRelations(address) {
             menu.relationship.close();
             graveInfo.show();
             relationshipSettings.show();
+            relationshipContainer.show();
         });
         relationshipSettings.show();
     } else {
@@ -613,6 +620,8 @@ graveInfo = {
 menu.create = {
     view: $("#grave-create"),
     open: function() {
+        graveInfo.hide();
+        $("#container-grave-settings").hide();
         $("#create-grave-dob").datepicker();
         $("#create-grave-dod").datepicker();
         if (this.view.hasClass("hidden")) {
@@ -653,6 +662,9 @@ menu.create = {
     close: function() {
         if (!this.view.hasClass("hidden")) {
             this.view.addClass("hidden");
+            $("#container-grave-settings").show();
+            graveInfo.show();
+            relationshipContainer.show();
         }
     }
 }

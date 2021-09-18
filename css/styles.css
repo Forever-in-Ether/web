@@ -234,12 +234,20 @@ button {
     align-self: auto;
 }
 
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
 .warning {
     background: #ff0;
 }
 
 body::-webkit-scrollbar {
-    width: 24px;
+    width: 12px;
     /* width of the entire scrollbar */
 }
 
