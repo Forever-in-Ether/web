@@ -15,8 +15,6 @@ var tempLng = "0";
 var aliveCheckedText = "";
 var aliveUncheckedText = "";
 
-var containerDeadsMessage, findAddress, btnFindGrave, btnCreateReset, btnOpenCreateNew, btnCreateDo, btnCreateClose, nograve, chkAlive, inDod, lblDod, inHeritage, heritageStoneText, stoneTextContainer, inHeritageMessage, btnOpenHeritage, menuHeritage, inHeritageClaimDob, btnHeritageClaim, btnHeritageClose, btnOwnGrave, relationshipSettings, btnSettingsRelationshipClose, btnGraveEdit, inHeritageLat, inHeritageLng, gravePositioning, inputCreateGraveLat, inputCreateGraveLng, mapCreateContainer, graveMapContainer, gravePortraitContainer, graveNameContainer, graveDateContainer, graveTextContainer, graveGiftsContainer, relationshipContainer, deadsmessage, inStoneText;
-
 async function startGraveyard() {
     $(document).tooltip();
     $("#grave").addClass("hidden");
@@ -24,51 +22,11 @@ async function startGraveyard() {
     var pk = await web3.eth.getAccounts();
     console.log("Private Key: " + pk);
 
-    findAddress = $("#find-address");
-    btnFindGrave = $("#btnFindGrave");
-    btnCreateReset = $("#btnCreateReset");
-    btnOpenCreateNew = $(".createEdit-button");
-    btnCreateDo = $("#btnCreateDo");
-    btnCreateClose = $("#btnCreateClose");
-    nograve = $("#no-grave");
-    chkAlive = $("#create-grave-alive");
-    inDod = $("#create-grave-dod");
-    lblDod = $("#lbl-create-grave-dod");
-    inHeritage = $("#create-grave-heritage");
-    inHeritageMessage = $("#create-grave-heritage-message-container");
-    btnOpenHeritage = $("#container-grave-claim-heritage");
-    menuHeritage = $("#menu-heritage");
-    heritageStoneText = $("#input-claim-heritag-grave-text");
-    inHeritageClaimDob = $("#input-claim-heritage-dob");
-    btnHeritageClaim = $("#btn-claim-heritage-claim");
-    btnHeritageClose = $("#btn-claim-heritage-close");
-    btnOwnGrave = $("#btn-grave-own");
-    relationshipSettings = $("#container-grave-settings");
-    btnSettingsRelationshipClose = $("#btn-settings-close");
-    btnGraveEdit = $("#container-grave-edit");
-    inHeritageLat = $("#input-claim-heritage-lat");
-    inHeritageLng = $("#input-claim-heritage-lng");
-    gravePositioning = $("#grave-positioning");
-    inputCreateGraveLat = $("#create-grave-pos-lat");
-    inputCreateGraveLng = $("#create-grave-pos-lng");
-    mapCreateContainer = $("#map-create");
-    graveMapContainer = $("#map-grave");
-    gravePortraitContainer = $("#container-grave-image");
-    graveNameContainer = $("#container-grave-name");
-    graveDateContainer = $("#container-grave-date");
-    graveTextContainer = $("#container-grave-text");
-    graveGiftsContainer = $("#container-gifts");
-    stoneTextContainer = $("#create-grave-text-container");
-    relationshipContainer = $("#container-grave-relationship");
-    deadsmessage = $("#deads-message");
-    inStoneText = $("#create-grave-text");
-    containerDeadsMessage = $("#deads-message-container");
-
-    btnOwnGrave.on("click", function() {
+    $("#btn-grave-own").on("click", function() {
         initGrave(selectedAccount);
     })
 
-    menuHeritage.hide();
+    $("#menu-heritage").hide();
 
     $('.chk-alive').change(function() {
         checkAlive(this.checked);
@@ -88,14 +46,14 @@ async function startGraveyard() {
 
     document.querySelector("#btn-connect").addEventListener("click", onConnect);
 
-    btnFindGrave.click(function() {
+    $("#btnFindGrave").click(function() {
         var addressField = $("#find-address");
         if (addressField.val()) {
             if (addressField.val().startsWith("0x")) {
                 initGrave(addressField.val());
             }
 
-            findAddress.select();
+            $("#find-address").select();
         } else {
             addressField.val(selectedAccount);
         }
@@ -103,41 +61,41 @@ async function startGraveyard() {
 
     });
 
-    findAddress.keypress(function(e) {
+    $("#find-address").keypress(function(e) {
         if (e.which == 13) {
             $("#btnFindGrave").click();
             return false;
         }
     });
 
-    btnCreateReset.click(function() {
+    $("#btnCreateReset").click(function() {
         menu.create.reset();
     });
 
-    btnOpenCreateNew.click(function() {
+    $(".createEdit-button").click(function() {
         if (menu.create.view.hasClass("hidden")) {
             menu.create.open();
-            nograve.hide();
+            $("#no-grave").hide();
         } else {
             menu.create.close();
-            nograve.show();
+            $("#no-grave").show();
         }
     });
 
-    btnCreateDo.click(function() {
+    $("#btnCreateDo").click(function() {
         createNewGrave();
     });
 
-    btnCreateClose.click(function() {
+    $("#btnCreateClose").click(function() {
         menu.create.close();
-        nograve.show();
-        btnGraveEdit.show();
+        $("#no-grave").show();
+        $("#container-grave-edit").show();
     });
 
     menu.create.reset();
 
-    if (findAddress.val() == "") {
-        findAddress.val(selectedAccount);
+    if ($("#find-address").val() == "") {
+        $("#find-address").val(selectedAccount);
     }
 
     initRecentGraves();
@@ -150,9 +108,9 @@ async function createNewGrave() {
     var heritage = $("#create-grave-heritage").val();
     var dob = $("#create-grave-dob").val();
     var dod = $("#create-grave-dod").val();
-    var text = inStoneText.val();
-    var lat = inputCreateGraveLat.val();
-    var lng = inputCreateGraveLng.val();
+    var text = $("#create-grave-text").val();
+    var lat = $("#create-grave-pos-lat").val();
+    var lng = $("#create-grave-pos-lng").val();
     var position = lat + "," + lng;
 
     if (heritage == "") heritage = "0x1E1a62760756bAD57a5b25b889A65DDa7EBDe630";
@@ -165,7 +123,7 @@ async function createNewGrave() {
     var c3 = dod.length > 0 && ($("#create-grave-dod").val().split("/").length === 3);
 
     if (c1 && c2 && c3) {
-        btnGraveEdit.show();
+        $("#container-grave-edit").show();
         menu.create.close();
         result = await graveyardV2.methods.newGrave(portrait + "<||>" + bg, name, heritage, dob, dod, text, position).send({ from: selectedAccount });
         dialog.wait(result);
@@ -192,7 +150,7 @@ async function createNewGrave() {
 
 async function initGrave(fromAccount) {
     graveInfo.show();
-    btnOpenHeritage.hide();
+    $("#container-grave-claim-heritage").hide();
 
     localStorage.setItem(STORAGE_GRAVE_ADDRESS, fromAccount);
     currentGrave = await callGrave(fromAccount);
@@ -219,13 +177,13 @@ async function initGrave(fromAccount) {
         $("#find-address").val(fromAccount);
         $('#grave').css('background-image', 'url(' + bg + ')');
         $("#create-grave-name").val(name);
-        inHeritage.val(heritage);
+        $("#create-grave-heritage").val(heritage);
         $("#create-grave-dob").val(dob);
-        inDod.val(dod);
+        $("#create-grave-dod").val(dod);
         $("#output-upload-portrait").val(portrait);
         $("#output-upload-background").val(bg);
-        inputCreateGraveLat.val(lat);
-        inputCreateGraveLng.val(lng);
+        $("#create-grave-pos-lat").val(lat);
+        $("#create-grave-pos-lng").val(lng);
 
         var dodPart = " - †" + dod;
         if (dod == aliveDod) dodPart = "<br><b>alive</b>";
@@ -241,17 +199,16 @@ async function initGrave(fromAccount) {
         tempLat = lat;
         tempLng = lng;
 
-        checked = inDod.val() == aliveDod;
-        chkAlive.prop('checked', checked);
+        checked = $("#create-grave-dod").val() == aliveDod;
+        $("#create-grave-alive").prop('checked', checked);
         if (text != "") {
-            if (checked) aliveCheckedText = CryptoJS.AES.decrypt(text, inHeritage.val()).toString(CryptoJS.enc.Utf8);
+            if (checked) aliveCheckedText = CryptoJS.AES.decrypt(text, $("#create-grave-heritage").val()).toString(CryptoJS.enc.Utf8);
             else aliveUncheckedText = text;
         }
         checkAlive(checked);
 
         // Mother & Father
-        var containerRelationship = $("#container-grave-relationship");
-        containerRelationship.show();
+        $("#container-grave-relationship").show();
 
         var textMother = '<a href="index.html?g=' + mother + '">Mother</a>';
         var textFather = '<a href="index.html?g=' + father + '">Father</a>';
@@ -264,14 +221,14 @@ async function initGrave(fromAccount) {
         } else if (mother == undefinedAddress && father != undefinedAddress) {
             textRelationship = textFather;
         } else {
-            containerRelationship.hide();
+            $("#container-grave-relationship").hide();
         }
-        containerRelationship.html("<br>" + textRelationship);
+        $("#container-grave-relationship").html("<br>" + textRelationship);
 
         // Grave text
-        if (dod != aliveDod) graveTextContainer.html(text);
+        if (dod != aliveDod) $("#container-grave-text").html(text);
         if (lat == "" || lng == "" || lat == "0" && lng == "0") {
-            graveMapContainer.hide();
+            $("#map-grave").hide();
         } else {
             clearOverlays();
             var graveLatLng = { "lat": parseFloat(lat), "lng": parseFloat(lng) };
@@ -282,24 +239,23 @@ async function initGrave(fromAccount) {
             });
             markersArray.push(info);
             info.open(mapGrave);
-            graveMapContainer.show();
+            $("#map-grave").show();
         }
 
         initRelations(fromAccount);
 
         if (selectedAccount == fromAccount) {
-            btnGraveEdit.show();
+            $("#container-grave-edit").show();
 
-            btnGraveEdit.click(function() {
+            $("#container-grave-edit").click(function() {
                 if (menu.create.view.hasClass("hidden")) {
                     menu.create.open();
-                    btnGraveEdit.hide();
+                    $("#container-grave-edit").hide();
                     graveInfo.hide();
-                    relationshipContainer.hide();
                 }
             });
         } else {
-            btnGraveEdit.hide();
+            $("#container-grave-edit").hide();
             $("#container-grave-settings").hide();
             $("#menu-relationship").hide();
         }
@@ -429,12 +385,12 @@ async function initRelations(address) {
         $("#in-address-mother").val(addressMother);
         $("#in-address-father").val(addressFather);
 
-        relationshipSettings.on("click", function() {
+        $("#container-grave-settings").on("click", function() {
             menu.relationship.open();
-            $("#menu-relationship").show();
-            relationshipContainer.hide();
-
             graveInfo.hide();
+            $("#menu-relationship").show();
+            $("#container-grave-edit").hide();
+            $("#container-grave-settings").hide();
         });
 
         btnSaveRelations = $("#btn-settings-save");
@@ -442,20 +398,19 @@ async function initRelations(address) {
             setRelationship($("#in-address-mother").val(), $("#in-address-father").val());
             menu.relationship.close();
             graveInfo.show();
-            relationshipSettings.show();
-            relationshipContainer.show();
+            $("#container-grave-settings").show();
         });
 
         btnGraveSettingsClose = $("#btn-settings-close");
         btnGraveSettingsClose.on("click", async function() {
             menu.relationship.close();
             graveInfo.show();
-            relationshipSettings.show();
-            relationshipContainer.show();
+            $("#container-grave-settings").show();
+            $("#container-grave-edit").show();
         });
-        relationshipSettings.show();
+        $("#container-grave-settings").show();
     } else {
-        relationshipSettings.hide();
+        $("#container-grave-settings").hide();
     }
 }
 
@@ -474,56 +429,55 @@ async function setRelationship(addressMother, addressFather) {
 }
 
 async function initHeritageClaiming(fromAccount) {
-    containerDeadsMessage.show();
+    $("#deads-message-container").show();
 
     selectedGrave = fromAccount;
     heritageGrave = await callGrave(fromAccount);
     var position = heritageGrave.getPosition();
-    inHeritageLat.val(heritageGrave.getLatitude(position));
-    inHeritageLng.val(heritageGrave.getLongitude(position));
+    $("#input-claim-heritage-lat").val(heritageGrave.getLatitude(position));
+    $("#input-claim-heritage-lng").val(heritageGrave.getLongitude(position));
 
     var encryptedAES = heritageGrave.getText();
     var text = CryptoJS.AES.decrypt(encryptedAES, heritageGrave.getHeritage()).toString(CryptoJS.enc.Utf8);
-    if (text != "") deadsmessage.text(text);
-    else containerDeadsMessage.hide();
+    if (text != "") $("#deads-message").text(text);
+    else $("#deads-message-container").hide();
 
-    btnOpenHeritage.show();
-    inHeritageClaimDob.datepicker();
-    btnOpenHeritage.on("click", async function() {
-        menuHeritage.show();
-        btnOpenHeritage.hide();
-        graveMapContainer.show();
+    $("#container-grave-claim-heritage").show();
+    $("#input-claim-heritage-dob").datepicker();
+    $("#container-grave-claim-heritage").on("click", async function() {
+        $("#menu-heritage").show();
+        $("#container-grave-claim-heritage").hide();
+        $("#map-grave").show();
 
 
-        relationshipContainer.hide();
+        $("#container-grave-relationship").hide();
         graveInfo.hide();
-        graveGiftsContainer.hide();
+        $("#container-gifts").hide();
     });
 
-    btnHeritageClose.on("click", async function() {
-        menuHeritage.hide();
-        btnOpenHeritage.show();
-        graveMapContainer.hide();
+    $("#btn-claim-heritage-close").on("click", async function() {
+        $("#menu-heritage").hide();
+        $("#container-grave-claim-heritage").show();
+        $("#map-grave").hide();
 
-        relationshipContainer.show();
         graveInfo.show();
-        graveGiftsContainer.show();
+        $("#container-gifts").show();
     });
 
-    btnHeritageClaim.on("click", async function() {
+    $("#btn-claim-heritage-claim").on("click", async function() {
         claimHeritage(selectedGrave);
-        graveMapContainer.hide();
+        $("#map-grave").hide();
 
         graveInfo.show();
-        graveGiftsContainer.show();
+        $("#container-gifts").show();
     });
 }
 
 async function claimHeritage(grave) {
-    btnHeritageClose.click();
-    var position = inHeritageLat.val() + "," + inHeritageLng.val();
-    var stoneText = heritageStoneText.val();
-    await graveyardV2.methods.claimHeritage(grave, inHeritageClaimDob.val(), stoneText, position).send({ from: selectedAccount });
+    $("#btn-claim-heritage-close").click();
+    var position = $("#input-claim-heritage-lat").val() + "," + $("#input-claim-heritage-lng").val();
+    var stoneText = $("#input-claim-heritag-grave-text").val();
+    await graveyardV2.methods.claimHeritage(grave, $("#input-claim-heritage-dob").val(), stoneText, position).send({ from: selectedAccount });
     initGrave(selectedGrave);
 }
 
@@ -604,16 +558,18 @@ function resetUpload() {
 
 graveInfo = {
     show: function() {
-        gravePortraitContainer.show();
-        graveNameContainer.show();
-        graveDateContainer.show();
-        graveTextContainer.show();
+        $("#container-grave-relationship").show();
+        $("#container-grave-image").show();
+        $("#container-grave-name").show();
+        $("#container-grave-date").show();
+        $("#container-grave-text").show();
     },
     hide: function() {
-        gravePortraitContainer.hide();
-        graveNameContainer.hide();
-        graveDateContainer.hide();
-        graveTextContainer.hide();
+        $("#container-grave-relationship").hide();
+        $("#container-grave-image").hide();
+        $("#container-grave-name").hide();
+        $("#container-grave-date").hide();
+        $("#container-grave-text").hide();
     }
 }
 
@@ -636,24 +592,23 @@ menu.create = {
         $("#create-grave-name").val("");
         $("#create-grave-dob").val("");
         $("#create-grave-dod").val("");
-        inStoneText.val("");
-        inputCreateGraveLat.val("");
-        inputCreateGraveLng.val("");
+        $("#create-grave-text").val("");
+        $("#create-grave-pos-lat").val("");
+        $("#create-grave-pos-lng").val("");
 
-        var findAddress = $("#find-address");
         addressGET = findGetParameter("g");
         if (addressGET == null || addressGET == undefined) {
             if (address) {
-                findAddress.val(address);
-                if (!findAddress.val().startsWith("0x")) {
-                    findAddress.val(selectedAccount);
+                $("#find-address").val(address);
+                if (!$("#find-address").val().startsWith("0x")) {
+                    $("#find-address").val(selectedAccount);
                 }
             } else {
                 initGrave(selectedAccount)
                 console.log("Create-Menu: No account");
             }
         } else {
-            findAddress.val(addressGET);
+            $("#find-address").val(addressGET);
             initGrave(addressGET);
         }
 
@@ -664,43 +619,42 @@ menu.create = {
             this.view.addClass("hidden");
             $("#container-grave-settings").show();
             graveInfo.show();
-            relationshipContainer.show();
         }
     }
 }
 
 function checkAlive(checked) {
     if (checked) {
-        inDod.hide();
-        lblDod.hide();
-        gravePositioning.hide();
-        graveGiftsContainer.hide();
-        inHeritageMessage.show();
-        stoneTextContainer.hide();
+        $("#create-grave-dod").hide();
+        $("#lbl-create-grave-dod").hide();
+        $("#grave-positioning").hide();
+        $("#container-gifts").hide();
+        $("#create-grave-heritage-message-container").show();
+        $("#create-grave-text-container").hide();
 
-        tempDod = inDod.val();
-        inDod.val(aliveDod);
-        tempLat = inputCreateGraveLat.val();
-        tempLng = inputCreateGraveLng.val();
-        inputCreateGraveLat.val("0");
-        inputCreateGraveLng.val("0");
+        tempDod = $("#create-grave-dod").val();
+        $("#create-grave-dod").val(aliveDod);
+        tempLat = $("#create-grave-pos-lat").val();
+        tempLng = $("#create-grave-pos-lng").val();
+        $("#create-grave-pos-lat").val("0");
+        $("#create-grave-pos-lng").val("0");
 
-        aliveUncheckedText = inStoneText.val();
-        inStoneText.val(aliveCheckedText);
+        aliveUncheckedText = $("#create-grave-text").val();
+        $("#create-grave-text").val(aliveCheckedText);
     } else {
-        inputCreateGraveLat.val(tempLat);
-        inputCreateGraveLng.val(tempLng);
+        $("#create-grave-pos-lat").val(tempLat);
+        $("#create-grave-pos-lng").val(tempLng);
         tempLat = "0";
         tempLng = "0";
-        inDod.val(tempDod);
+        $("#create-grave-dod").val(tempDod);
         tempDod = aliveDod;
-        inDod.show();
-        lblDod.show();
-        gravePositioning.show();
-        graveGiftsContainer.show()
-        inHeritageMessage.hide();
-        stoneTextContainer.show();
-        aliveCheckedText = inStoneText.val();
-        inStoneText.val(aliveUncheckedText);
+        $("#create-grave-dod").show();
+        $("#lbl-create-grave-dod").show();
+        $("#grave-positioning").show();
+        $("#container-gifts").show()
+        $("#create-grave-heritage-message-container").hide();
+        $("#create-grave-text-container").show();
+        aliveCheckedText = $("#create-grave-text").val();
+        $("#create-grave-text").val(aliveUncheckedText);
     }
 }
