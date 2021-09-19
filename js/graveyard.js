@@ -7,7 +7,6 @@ var dialog = dialog || {};
 
 const aliveDod = "00/00/0000";
 
-var nograve = true;
 var currentGrave = "";
 var selectedGrave = "";
 var tempDod = "00/00/0000";
@@ -80,8 +79,10 @@ async function startGraveyard() {
 }
 
 async function initGrave(fromAccount) {
-    graveInfo.show();
-    $("#container-grave-claim-heritage").hide();
+    grave.create.hide();
+    grave.relationship.hide();
+    grave.heritage.hide();
+    $("#btn-grave-claim-heritage").hide();
 
     localStorage.setItem(STORAGE_GRAVE_ADDRESS, fromAccount);
     currentGrave = await callGrave(fromAccount);
@@ -100,7 +101,8 @@ async function initGrave(fromAccount) {
     var lng = currentGrave.getLongitude();
 
     if (name !== "" && dob !== "") {
-        nograve = false;
+        $("#grave").show();
+        graveInfo.show();
 
         $("#grave").show();
         $("#no-grave").hide();
@@ -160,18 +162,26 @@ async function initGrave(fromAccount) {
 
         // Grave text
         if (dod != aliveDod) $("#container-grave-text").html(text);
+        else $("#container-grave-text").html("");
         if (lat == "" || lng == "" || lat == "0" && lng == "0") {
             $("#map-grave").hide();
         } else {
             clearOverlays();
             var graveLatLng = { "lat": parseFloat(lat), "lng": parseFloat(lng) };
             if (mapGrave) mapGrave.setCenter(graveLatLng);
-            var info = new google.maps.InfoWindow({
-                content: currentGrave.getName(),
-                position: graveLatLng,
-            });
-            markersArray.push(info);
-            info.show(mapGrave);
+
+            try {
+                var info = new google.maps.InfoWindow({
+                    content: currentGrave.getName(),
+                    position: graveLatLng,
+                });
+                markersArray.push(info);
+                info.open(mapGrave);
+            }
+            catch(e) {
+                console.log(e);
+            }
+
             $("#map-grave").show();
         }
 
@@ -192,8 +202,12 @@ async function initGrave(fromAccount) {
             $("#grave-relationship").hide();
         }
     } else {
-        nograve = true;
-        grave.empty.show();
+        grave.empty.show(function() {
+            $("#grave").show();
+            graveInfo.show();
+        });
+        $("#grave").hide();
+        graveInfo.hide();
         if (selectedAccount != null) {
             if (selectedAccount == fromAccount) {
                 $("#btn-grave-setup").show();
@@ -424,11 +438,11 @@ async function initHeritageClaiming(fromAccount) {
     if (text != "") $("#deads-message").text(text);
     else $("#deads-message-container").hide();
 
-    $("#container-grave-claim-heritage").show();
+    $("#btn-grave-claim-heritage").show();
     $("#input-claim-heritage-dob").datepicker();
-    $("#container-grave-claim-heritage").on("click", async function() {
+    $("#btn-grave-claim-heritage").on("click", async function() {
         $("#grave-heritage").show();
-        $("#container-grave-claim-heritage").hide();
+        $("#btn-grave-claim-heritage").hide();
         $("#map-grave").show();
 
 
@@ -437,9 +451,9 @@ async function initHeritageClaiming(fromAccount) {
         $("#container-gifts").hide();
     });
 
-    $("#btn-claim-heritage-hide").on("click", async function() {
+    $("#btn-claim-heritage-close").on("click", async function() {
         $("#grave-heritage").hide();
-        $("#container-grave-claim-heritage").show();
+        $("#btn-grave-claim-heritage").show();
         $("#map-grave").hide();
 
         graveInfo.show();
@@ -447,6 +461,7 @@ async function initHeritageClaiming(fromAccount) {
     });
 
     $("#btn-claim-heritage-claim").on("click", async function() {
+        $("#grave-heritage").hide();
         claimHeritage(selectedGrave);
         $("#map-grave").hide();
 
@@ -650,6 +665,25 @@ grave.create = {
             initGrave(addressGET);
         }
 
+    },
+
+    hide: function() {
+        if (this.onHide != null) this.onHide();
+        this.view.hide();
+    }
+}
+
+grave.heritage = {
+    onHide: null,
+    view: $(""),
+
+    show: function(callback) {
+        this.onHide = callback;
+        this.view.show();
+
+        $("btn-claim-heritage-close").click(function() {
+            grave.heritage.hide();
+        });
     },
 
     hide: function() {
