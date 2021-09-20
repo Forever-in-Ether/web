@@ -26,7 +26,7 @@ dialog.flower.buy.show = function(address, name, flowerType) {
     });
 
     $("#btnFlowerOk").click(function(event) {
-        buyFlowers(address, flowerType, $("#inFlower").val())
+        flowers.buy(address, flowerType, $("#inFlower").val())
     });
 
     dialog.show();
