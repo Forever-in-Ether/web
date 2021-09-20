@@ -15,6 +15,7 @@ var tempLng = "0";
 
 var aliveCheckedText = "";
 var aliveUncheckedText = "";
+var blocktime = 13.5;
 
 async function startGraveyard() {
     var params = [{ chainId: '0x1' }]; // Productive
@@ -76,6 +77,7 @@ async function startGraveyard() {
 
     initGraveEdit();
     initRecentGraves();
+    blocktime = await getBlockAverageTime();
 }
 
 async function initGrave(fromAccount) {

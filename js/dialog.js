@@ -26,7 +26,7 @@ dialog.flower.buy.show = function(address, name, flowerType) {
     });
 
     $("#btnFlowerOk").click(function(event) {
-        flowers.buy(address, flowerType, $("#inFlower").val())
+        flower.buy(address, flowerType, $("#inFlower").val())
     });
 
     dialog.show();
@@ -34,12 +34,12 @@ dialog.flower.buy.show = function(address, name, flowerType) {
 
 dialog.candle = dialog.candle || {};
 dialog.candle.buy = dialog.candle.buy || {};
-dialog.candle.buy.show = function() {
+dialog.candle.buy.show = async function() {
     var day = 86400;
-    var dayDrops = Math.round(day / 13.5).toFixed(0);
-    var weekDrops = Math.round((day * 7) / 13.5).toFixed(0);
-    var monthDrops = Math.round((day * 30) / 13.5).toFixed(0);
-    var yearDrops = Math.round((day * 365) / 13.5).toFixed(0);
+    var dayDrops = Math.round(day / blocktime).toFixed(0);
+    var weekDrops = Math.round((day * 7) / blocktime).toFixed(0);
+    var monthDrops = Math.round((day * 30) / blocktime).toFixed(0);
+    var yearDrops = Math.round((day * 365) / blocktime).toFixed(0);
 
     $("#dialog").attr("title", "Purchase");
     $("#dialog").html('<p>How much Ether drops you want to fill to the candle?</p><p id="outRefilPrice" style="font-size: 10px;">Price: 0 Ether</p><input id="inputRefil" type="number" placeholder="Amount" value="0"></input><button id="btnRefilOk" style="float: right;">Fill</button><br><sub>Fill: <a href="javascript:candle.fill(\'' + dayDrops + '\');">1 day</a>, <a href="javascript:candle.fill(\'' + weekDrops + '\');">1 week</a>, <a href="javascript:candle.fill(\'' + monthDrops + '\');">1 month</a>, <a href="javascript:candle.fill(\'' + yearDrops + '\');">1 year</a></sub>');
