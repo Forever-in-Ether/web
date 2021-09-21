@@ -117,6 +117,11 @@ contract.Candles = {
         {
             "inputs": [
                 {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                },
+                {
                     "internalType": "uint256",
                     "name": "_style",
                     "type": "uint256"
@@ -155,6 +160,6 @@ contract.Candles = {
         }
     ],
 
-    address_test: "0x31Cdb3A7876fC8A1140f80E123C8d2f3B5a3564D", // Test
+    address_test: "0x797D7d101698A3A2003218ca48b83Bea4c7f6160", // Test
     address: "" // Productive
 };
