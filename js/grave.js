@@ -53,13 +53,9 @@ async function callGrave(fromAccount) {
     }
 
     if (fromAccount) {
-        var resultV2 = await graveyardV2.methods.getGrave(fromAccount).call();
+        var result = await graveyard.methods.getGrave(fromAccount).call();
 
-        var grave = new Grave(resultV2[0].split("<||>")[0], resultV2[0].split("<||>")[1], resultV2[1], resultV2[2], resultV2[3], resultV2[4], resultV2[5], resultV2[6], resultV2[6].split(",")[0], resultV2[6].split(",")[1]);
-        if (grave.getName() == "" && grave.getBirth() == "") {
-            var resultV1 = await graveyard.methods.getGrave(fromAccount).call();
-            grave = new Grave(resultV1[0], resultV1[1], resultV1[2], "", resultV1[3], resultV1[4], resultV1[5], resultV1[6], resultV1[6].split(",")[0], resultV1[6].split(",")[1]);
-        }
+        var grave = new Grave(result[0].split("<||>")[0], result[0].split("<||>")[1], result[1], result[2], result[3], result[4], result[5], result[6], result[6].split(",")[0], result[6].split(",")[1]);
 
         return grave;
     }

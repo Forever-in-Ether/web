@@ -3,280 +3,267 @@ global.contracts = global.contracts || {};
 
 var contract = contract || {};
 contract.Graveyard = {
-    abi: [{
-            "constant": true,
-            "inputs": [{
-                "name": "_address",
-                "type": "address"
-            }],
-            "name": "getDateOfBirth",
-            "outputs": [{
-                "name": "",
-                "type": "string"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [{
-                "name": "",
-                "type": "uint256"
-            }],
-            "name": "grave_address",
-            "outputs": [{
-                "name": "",
-                "type": "address"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [{
-                "name": "_address",
-                "type": "address"
-            }],
-            "name": "getDateOfDeath",
-            "outputs": [{
-                "name": "",
-                "type": "string"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [{
-                "name": "_address",
-                "type": "address"
-            }],
-            "name": "getShortInfo",
-            "outputs": [{
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [{
-                    "name": "_image",
-                    "type": "string"
-                },
-                {
-                    "name": "_bg",
-                    "type": "string"
-                },
-                {
-                    "name": "_name",
-                    "type": "string"
-                },
-                {
-                    "name": "_dob",
-                    "type": "string"
-                },
-                {
-                    "name": "_dod",
-                    "type": "string"
-                },
-                {
-                    "name": "_text",
-                    "type": "string"
-                },
-                {
-                    "name": "_latlng",
-                    "type": "string"
-                },
-                {
-                    "name": "_address",
-                    "type": "address"
-                }
-            ],
-            "name": "newGrave",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [{
-                "name": "_address",
-                "type": "address"
-            }],
-            "name": "getGrave",
-            "outputs": [{
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [{
-                "name": "_address",
-                "type": "address"
-            }],
-            "name": "getName",
-            "outputs": [{
-                "name": "",
-                "type": "string"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "showBalance",
-            "outputs": [{
-                "name": "",
-                "type": "uint256"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [{
-                    "name": "_address",
-                    "type": "address"
-                },
-                {
-                    "name": "_amount",
-                    "type": "uint256"
-                }
-            ],
-            "name": "fillCandle",
-            "outputs": [],
-            "payable": true,
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "getGraveAmount",
-            "outputs": [{
-                "name": "",
-                "type": "uint256"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [{
-                "name": "_address",
-                "type": "address"
-            }],
-            "name": "isBurning",
-            "outputs": [{
-                    "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "getGraves",
-            "outputs": [{
-                "name": "",
-                "type": "address[]"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
+    abi: [
         {
             "inputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "constructor"
         },
         {
             "anonymous": false,
-            "inputs": [{
-                "indexed": false,
-                "name": "grave_address",
-                "type": "address"
-            }],
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "grave_address",
+                    "type": "address"
+                }
+            ],
             "name": "newGraveEvent",
             "type": "event"
         },
         {
-            "anonymous": false,
-            "inputs": [{
-                "indexed": false,
-                "name": "candle_address",
-                "type": "address"
-            }],
-            "name": "candleChangeEvent",
-            "type": "event"
+            "stateMutability": "payable",
+            "type": "fallback"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
+            "name": "cashout",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "x",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_date",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_text",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_position",
+                    "type": "string"
+                }
+            ],
+            "name": "claimHeritage",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getBalance",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
+            "name": "getGrave",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getGraveAmount",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getGraves",
+            "outputs": [
+                {
+                    "internalType": "address[]",
+                    "name": "",
+                    "type": "address[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "x",
+                    "type": "address"
+                }
+            ],
+            "name": "getHeritage",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getOwner",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "grave_address",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_image",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_heritage",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_dob",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_dod",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_text",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_position",
+                    "type": "string"
+                }
+            ],
+            "name": "newGrave",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
+            "name": "setOwner",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
         }
     ],
 
-    address_test: "0x33f8406C79ebf50e8DBeAC3fC97Cb963eB2b8D81", // Test
-    address: "0x35a285EfF58DeF40F9967c7640aE7bc86386a440" // Productive
+    address_test: "0x611E14e5b355920c9890d63643a1A48D3971Cb16", // Test
+    address: "" // Productive
 };

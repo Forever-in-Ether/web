@@ -4,11 +4,11 @@ var flower = flower || {};
 
 flower.refresh = async function() {
     var graveAccount = localStorage.getItem(STORAGE_GRAVE_ADDRESS);
-    var flower = await flowers.methods.getGrave(graveAccount).call();
+    var result = await flowers.methods.getGrave(graveAccount).call();
 
-    $("#amount-flower1").html("White Aster<br><b>" + flower[0] + "</b>");
-    $("#amount-flower2").html("Red Rose<br><b>" + flower[1] + "</b>");
-    $("#amount-flower3").html("Ether Rose<br><b>" + flower[2] + "</b>");
+    $("#amount-flower1").html("White Aster<br><b>" + result[0] + "</b>");
+    $("#amount-flower2").html("Red Rose<br><b>" + result[1] + "</b>");
+    $("#amount-flower3").html("Ether Rose<br><b>" + result[2] + "</b>");
 }
 
 flower.buy = async function(address, flowerType, amount) {

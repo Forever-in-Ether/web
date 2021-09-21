@@ -2,14 +2,14 @@ var candle = candle || {};
 candle.fill = async function(_amount) {
     var _value = round(_amount * priceCandle, roundTo);
     var tokens = Web3.utils.toWei(_value.toString(), 'ether');
-    await graveyard.methods.fillCandle($("#find-address").val(), _amount).send({ from: selectedAccount, value: Web3.utils.toBN(tokens) });
+    await candles.methods.fillCandle($("#find-address").val(), _amount).send({ from: selectedAccount, value: Web3.utils.toBN(tokens) });
     dialog.buy.finish();
 
 };
 
 candle.refresh = async function() {
     var graveAccount = localStorage.getItem(STORAGE_GRAVE_ADDRESS);
-    result = await graveyard.methods.isBurning(graveAccount).call();
+    result = await candles.methods.burningInfo(graveAccount).call();
     var burningText = 'No candle is burning.<br><a id="linkRefil">Refill ether candle.';
 
     // TODO: Add cool candle

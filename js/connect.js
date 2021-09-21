@@ -23,8 +23,8 @@ var web3;
 // Address of the selected account
 var selectedAccount;
 var graveyard;
-var graveyardV2;
 var relationship;
+var candles;
 var flowers;
 
 function init() {
@@ -80,14 +80,14 @@ function init() {
  * Kick in the UI action after Web3modal dialog has chosen a provider
  */
 async function fetchAccountData() {
-    var graveyardV1Address = contract.Graveyard.address;
-    if (test) graveyardV1Address = contract.Graveyard.address_test;
-
-    var graveyardV2Address = contract.GraveyardV2.address;
-    if (test) graveyardV2Address = contract.GraveyardV2.address_test;
+    var graveyardAddress = contract.Graveyard.address;
+    if (test) graveyardAddress = contract.Graveyard.address_test;
 
     var relationshipAddress = contract.Relationship.address;
     if (test) relationshipAddress = contract.Relationship.address_test;
+
+    var candlesAddress = contract.Candles.address;
+    if (test) candlesAddress = contract.Candles.address_test;
 
     var flowersAddress = contract.Flowers.address;
     if (test) flowersAddress = contract.Flowers.address_test;
@@ -95,9 +95,9 @@ async function fetchAccountData() {
 
     // Get a Web3 instance for the wallet
     web3 = new Web3(provider);
-    graveyard = new web3.eth.Contract(contract.Graveyard.abi, graveyardV1Address);
-    graveyardV2 = new web3.eth.Contract(contract.GraveyardV2.abi, graveyardV2Address);
+    graveyard = new web3.eth.Contract(contract.Graveyard.abi, graveyardAddress);
     relationship = new web3.eth.Contract(contract.Relationship.abi, relationshipAddress);
+    candles = new web3.eth.Contract(contract.Candles.abi, candlesAddress);
     flowers = new web3.eth.Contract(contract.Flowers.abi, flowersAddress);
 
     graveyard.events.newGraveEvent(function(error, result) {
@@ -107,16 +107,6 @@ async function fetchAccountData() {
             initGraveList();
         } else
             console.log(error);
-    });
-
-    graveyard.events.candleChangeEvent(function(error, result) {
-        if (!error) {
-            graveyard.isBurning(result.args.candle_address, function(error, result) {
-                refreshCandle(error, result);
-            });
-        } else {
-            console.error(error);
-        }
     });
 
     console.log("Web3 instance is", web3);

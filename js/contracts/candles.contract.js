@@ -4,7 +4,7 @@ var global = global || {};
 global.contracts = global.contracts || {};
 
 var contract = contract || {};
-contract.Flowers = {
+contract.Candles = {
     abi: [
         {
             "inputs": [
@@ -28,21 +28,27 @@ contract.Flowers = {
                     "internalType": "address",
                     "name": "_address",
                     "type": "address"
-                },
+                }
+            ],
+            "name": "burningInfo",
+            "outputs": [
                 {
                     "internalType": "uint256",
-                    "name": "flowerType",
+                    "name": "",
                     "type": "uint256"
                 },
                 {
                     "internalType": "uint256",
-                    "name": "_amount",
+                    "name": "",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "",
                     "type": "uint256"
                 }
             ],
-            "name": "buyFlower",
-            "outputs": [],
-            "stateMutability": "payable",
+            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -64,53 +70,32 @@ contract.Flowers = {
                     "internalType": "address",
                     "name": "_address",
                     "type": "address"
-                }
-            ],
-            "name": "getGrave",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
                 },
                 {
                     "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "",
+                    "name": "_amount",
                     "type": "uint256"
                 }
             ],
-            "stateMutability": "view",
+            "name": "fillCandle",
+            "outputs": [],
+            "stateMutability": "payable",
             "type": "function"
         },
         {
             "inputs": [
                 {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
+            "name": "getCandleStyle",
+            "outputs": [
+                {
                     "internalType": "uint256",
                     "name": "",
                     "type": "uint256"
-                }
-            ],
-            "name": "grave_address",
-            "outputs": [
-                {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
                 }
             ],
             "stateMutability": "view",
@@ -127,6 +112,19 @@ contract.Flowers = {
                 }
             ],
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_style",
+                    "type": "uint256"
+                }
+            ],
+            "name": "setCandleStyle",
+            "outputs": [],
+            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
@@ -157,6 +155,6 @@ contract.Flowers = {
         }
     ],
 
-    address_test: "0xda6afFC692A5A1B1aaf38D7c0D9f746E1769eBdf", // Test
+    address_test: "0x31Cdb3A7876fC8A1140f80E123C8d2f3B5a3564D", // Test
     address: "" // Productive
 };

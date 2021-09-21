@@ -3,85 +3,96 @@ global.contracts = global.contracts || {};
 
 var contract = contract || {};
 contract.Relationship = {
-    abi: [{
-            "constant": true,
-            "inputs": [{
-                "name": "_addr",
-                "type": "address"
-            }],
+    abi: [
+        {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_addr",
+                    "type": "address"
+                }
+            ],
             "name": "getFather",
-            "outputs": [{
-                "name": "",
-                "type": "address"
-            }],
-            "payable": false,
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
             "stateMutability": "view",
             "type": "function"
         },
         {
-            "constant": false,
-            "inputs": [{
-                "name": "_addr",
-                "type": "address"
-            }],
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_addr",
+                    "type": "address"
+                }
+            ],
+            "name": "getMother",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_addr",
+                    "type": "address"
+                }
+            ],
             "name": "setFather",
             "outputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
-            "constant": false,
-            "inputs": [{
-                "name": "_addr",
-                "type": "address"
-            }],
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_addr",
+                    "type": "address"
+                }
+            ],
             "name": "setMother",
             "outputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
-            "constant": true,
-            "inputs": [{
-                "name": "_addr",
-                "type": "address"
-            }],
-            "name": "getMother",
-            "outputs": [{
-                "name": "",
-                "type": "address"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [{
+            "inputs": [
+                {
+                    "internalType": "address",
                     "name": "_mother",
                     "type": "address"
                 },
                 {
+                    "internalType": "address",
                     "name": "_father",
                     "type": "address"
                 }
             ],
             "name": "setRelationship",
             "outputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
-        },
-        {
-            "inputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "constructor"
         }
     ],
 
-    address_test: "0xe1ebbfdF2503bd6034f44CeF648A9528f4c25dC7", // Test
+    address_test: "0x9f84E0597a75E00f79Ac951Df122AA15c6D5865A", // Test
     address: "" // Productive
 };
