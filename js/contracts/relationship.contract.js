@@ -5,7 +5,13 @@ var contract = contract || {};
 contract.Relationship = {
     abi: [
         {
-            "inputs": [],
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
             "stateMutability": "nonpayable",
             "type": "constructor"
         },
@@ -48,10 +54,42 @@ contract.Relationship = {
             "type": "function"
         },
         {
+            "inputs": [],
+            "name": "graveyard_address",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
             "inputs": [
                 {
                     "internalType": "address",
-                    "name": "_addr",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
+            "name": "isSet",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_father",
                     "type": "address"
                 }
             ],
@@ -64,11 +102,60 @@ contract.Relationship = {
             "inputs": [
                 {
                     "internalType": "address",
-                    "name": "_addr",
+                    "name": "_from",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_father",
+                    "type": "address"
+                }
+            ],
+            "name": "setFatherFrom",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
+            "name": "setGraveyardAddress",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_mother",
                     "type": "address"
                 }
             ],
             "name": "setMother",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_from",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_mother",
+                    "type": "address"
+                }
+            ],
+            "name": "setMotherFrom",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -90,9 +177,32 @@ contract.Relationship = {
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_from",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_mother",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_father",
+                    "type": "address"
+                }
+            ],
+            "name": "setRelationshipFrom",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
         }
     ],
 
-    address_test: "0x9f84E0597a75E00f79Ac951Df122AA15c6D5865A", // Test
+    address_test: "0xAE5644FFcB00607Ff3bBb0d551DCba60580713C1", // Test
     address: "" // Productive
 };

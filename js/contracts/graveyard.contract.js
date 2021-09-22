@@ -124,6 +124,11 @@ contract.Graveyard = {
                     "internalType": "string",
                     "name": "",
                     "type": "string"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
                 }
             ],
             "stateMutability": "view",
@@ -209,6 +214,25 @@ contract.Graveyard = {
         {
             "inputs": [
                 {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
+                }
+            ],
+            "name": "isSet",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
                     "internalType": "string",
                     "name": "_image",
                     "type": "string"
@@ -282,6 +306,6 @@ contract.Graveyard = {
         }
     ],
 
-    address_test: "0x676eA446D26B2A82D9ed30980F79C4585988ECe8", // Test
+    address_test: "0x4355Ed8e7bEd48D69A8b46f6Ab56e38Ee1eCF3cd", // Test
     address: "" // Productive
 };
