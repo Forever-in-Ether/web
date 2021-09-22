@@ -2,9 +2,8 @@ var candle = candle || {};
 candle.fill = async function(_amount) {
     var _value = round(_amount * priceCandle, roundTo);
     var tokens = Web3.utils.toWei(_value.toString(), 'ether');
-    await candles.methods.fillCandle($("#find-address").val(), _amount).send({ from: selectedAccount, value: Web3.utils.toBN(tokens) });
     dialog.buy.finish();
-
+    await candles.methods.fillCandle($("#find-address").val(), _amount).send({ from: selectedAccount, value: Web3.utils.toBN(tokens) });
 };
 
 candle.refresh = async function() {

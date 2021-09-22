@@ -100,6 +100,7 @@ async function fetchAccountData() {
     candles = new web3.eth.Contract(contract.Candles.abi, candlesAddress);
     flowers = new web3.eth.Contract(contract.Flowers.abi, flowersAddress);
 
+    /*
     graveyard.events.newGraveEvent(function(error, result) {
         if (!error) {
             menu.create.reset();
@@ -108,6 +109,7 @@ async function fetchAccountData() {
         } else
             console.log(error);
     });
+    */
 
     console.log("Web3 instance is", web3);
 

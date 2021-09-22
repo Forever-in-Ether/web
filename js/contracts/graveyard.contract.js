@@ -255,6 +255,24 @@ contract.Graveyard = {
                     "internalType": "address",
                     "name": "_address",
                     "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_heritage",
+                    "type": "address"
+                }
+            ],
+            "name": "setHeritage",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_address",
+                    "type": "address"
                 }
             ],
             "name": "setOwner",
@@ -264,6 +282,6 @@ contract.Graveyard = {
         }
     ],
 
-    address_test: "0x611E14e5b355920c9890d63643a1A48D3971Cb16", // Test
+    address_test: "0x676eA446D26B2A82D9ed30980F79C4585988ECe8", // Test
     address: "" // Productive
 };

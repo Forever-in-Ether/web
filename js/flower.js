@@ -14,6 +14,6 @@ flower.refresh = async function() {
 flower.buy = async function(address, flowerType, amount) {
     var _value = round(amount * flowerPrice, roundTo);
     var tokens = Web3.utils.toWei(_value.toString(), 'ether');
-    await flowers.methods.buyFlower(address, flowerType, amount).send({ from: selectedAccount, value: Web3.utils.toBN(tokens) });
     dialog.buy.finish();
+    await flowers.methods.buyFlower(address, flowerType, amount).send({ from: selectedAccount, value: Web3.utils.toBN(tokens) });
 }

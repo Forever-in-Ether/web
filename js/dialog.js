@@ -26,7 +26,8 @@ dialog.flower.buy.show = function(address, name, flowerType) {
     });
 
     $("#btnFlowerOk").click(function(event) {
-        flower.buy(address, flowerType, $("#inFlower").val())
+        flower.buy(address, flowerType, $("#inFlower").val());
+        dialog.flower.buy.show(fromAccount, result[2], 3);
     });
 
     dialog.show();
@@ -57,10 +58,11 @@ dialog.candle.buy.show = async function() {
 }
 
 dialog.buy.finish = function() {
-    $("#dialog").attr("title", "Ether received.");
-    $("#dialog").html('<p>Network accepted your transaction. Your purchase is going to be shown in the next minutes.</p>');
+    dialog.hide();
+    //$("#dialog").attr("title", "Ether received.");
+    //$("#dialog").html('<p>Network accepted your transaction. Your purchase is going to be shown in the next minutes.</p>');
 
-    dialog.show();
+    //dialog.show();
 }
 
 dialog.show = function() {
@@ -70,4 +72,9 @@ dialog.show = function() {
             if (!$("#dialog").hasClass("hidden")) $("#dialog").addClass("hidden");
         }
     });
+}
+
+dialog.hide = function() {
+    if (!$("#dialog").hasClass("hidden")) $("#dialog").addClass("hidden");
+    $("#dialog").dialog("close");
 }

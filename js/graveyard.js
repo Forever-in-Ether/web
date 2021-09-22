@@ -284,8 +284,8 @@ async function createNewGrave() {
         $("#btn-grave-edit").show();
         grave.create.hide();
         result = await graveyard.methods.newGrave(portrait + "<||>" + bg, name, heritage, dob, dod, text, position).send({ from: selectedAccount });
-        dialog.wait(result);
         initGrave(selectedAccount);
+        initRecentGraves();
     }
 
     if (!c1) {
