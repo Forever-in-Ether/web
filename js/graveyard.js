@@ -30,7 +30,6 @@ async function startGraveyard() {
 
     document.querySelector("#btn-connect").addEventListener("click", onConnect);
 
-    $(document).tooltip();
     $("#grave").hide();
 
     $("#grave-heritage").hide();
@@ -340,6 +339,7 @@ function outputRecentGrave(graveAddress, name, yearBirth, yearDeath) {
         if (yearDeath == "0000") lifetime = "still alive";
         var text = '<a title="' + lifetime + '" href="index.html?g=' + graveAddress + '" onclick="initGrave(\'' + graveAddress + '\'); return false;"><li class="list-updated-graves">' + name + '</li></a>';
         $("#ul-gl").append('|' + text + '|');
+        $("#ul-gl").tooltip();
     }
 }
 
@@ -532,6 +532,7 @@ grave.create = {
     view: $("#grave-create"),
     show: function(callback) {
         this.onHide = callback;
+        $("#grave-create").tooltip();
         $("#create-grave-dob").datepicker({ dateFormat: 'dd.mm.yy' });
         $("#create-grave-dod").datepicker({ dateFormat: 'dd.mm.yy' });
         if (this.view.is(":hidden")) {
